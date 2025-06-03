@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CodeByRaphael - Accueil</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #eee;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 0;
+      overflow-x: hidden;
+    }
+    a {
+      color: #4f90ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header, footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background-color: #1e1e1ecc;
+      border-bottom: 1px solid #333;
+      position: relative;
+      z-index: 1;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      background-color: #1a1a1add;
+      border-radius: 8px;
+      box-shadow: 0 0 15px #00ff0044;
+    }
+    h1, h2, h3 {
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #bbb;
+    }
+    section {
+      margin-bottom: 3rem;
+    }
+    #hero {
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    #hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+    #hero p {
+      font-size: 1.2rem;
+      color: #7a7a7a;
+      margin-bottom: 1.5rem;
+    }
+    #hero a.button {
+      background-color: #4f90ff;
+      color: white;
+      padding: 0.7rem 1.6rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      box-shadow: 0 0 8px #4f90ffaa;
+    }
+    #hero a.button:hover {
+      background-color: #3c6ddb;
+    }
+    #skills ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+    }
+    #skills li {
+      background: #222;
+      padding: 0.8rem;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 0 5px rgba(79, 144, 255, 0.5);
+    }
+    #projects .project-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media(min-width: 600px) {
+      #projects .project-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .project {
+      background: #222;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 0 10px rgba(79, 144, 255, 0.3);
+    }
+    .project h3 {
+      color: #4f90ff;
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      font-size: 0.9rem;
+      color: #555;
+      border-top: 1px solid #333;
+      padding: 1rem 0;
+      position: relative;
+      z-index: 1;
+    }
+    #matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: transparent;
+    }
+    #menu-toggle {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      width: 35px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    #menu-toggle span {
+      display: block;
+      height: 4px;
+      background: #4f90ff;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      left: -220px;
+      width: 200px;
+      height: 100vh;
+      background-color: #222;
+      box-shadow: 3px 0 6px rgba(0,0,0,0.6);
+      padding-top: 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: left 0.4s ease;
+      z-index: 9;
+    }
+    nav a {
+      color: #4f90ff;
+      padding: 0.75rem 1.5rem;
+      font-weight: 700;
+      border-left: 4px solid transparent;
+      transition: background-color 0.3s, border-left-color 0.3s;
+    }
+    nav a:hover {
+      background-color: #3c6ddb;
+      border-left-color: #82b1ff;
+    }
+    #menu-toggle.open + nav {
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <div id="menu-toggle" aria-label="Ouvrir la navigation" role="button" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <nav>
+    <a href="projets.html" target="_blank" rel="noopener noreferrer">Mes Projets</a>
+    <a href="Me contacter.html" target="_blank" rel="noopener noreferrer">Me contacter</a>
+  </nav>
+
+  <header>
+    <h1>CodeByRaphael</h1>
+  </header>
+
+  <main>
+    <section id="hero">
+      <h1>Salut, je suis Raphael</h1>
+      <p>Développeur Web & Designer passionné</p>
+      <a href="projets.html" target="_blank" rel="noopener noreferrer" class="button">Voir mes projets</a>
+    </section>
+
+    <section id="about">
+      <h2>À propos</h2>
+      <p>Je suis un lycéen passionné par le développement web et le design. J'aime créer des interfaces modernes, responsives et utiles pour aider les autres à avoir une présence en ligne professionnelle.</p>
+    </section>
+
+    <section id="skills">
+      <h2>Compétences</h2>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Tailwind CSS</li>
+        <li>Git / GitHub</li>
+        <li>Web Design</li>
+        <li>UI/UX</li>
+      </ul>
+    </section>
+
+    
+
+  <footer>
+    © 2025 CodeByRaphael. Tous droits réservés.
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+
+    const binaryChars = ['0', '1'];
+    const fontSize = 16;
+    let columns = Math.floor(canvas.width / fontSize);
+
+    const drops = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * canvas.height / fontSize;
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(18, 18, 18, 0.1)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#00ff00';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = binaryChars[Math.floor(Math.random() * binaryChars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      columns = Math.floor(canvas.width / fontSize);
+      drops.length = 0;
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * canvas.height / fontSize;
+      }
+    });
+
+    // Hamburger toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('nav');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('open');
+      if (menuToggle.classList.contains('open')) {
+        nav.style.left = '0';
+      } else {
+        nav.style.left = '-220px';
+      }
+    });
+
+    // Keyboard accessible toggle
+    menuToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        menuToggle.click();
+      }
+    });
+  </script>
+</body>
+</html>
